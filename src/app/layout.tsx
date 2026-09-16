@@ -60,12 +60,12 @@ export default function RootLayout({
                   <ul className="space-y-2">
                     <li>
                       <a
-                        href="https://bohr.life"
+                        href="https://botchain.ai"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-primary transition-colors flex items-center gap-1.5"
                       >
-                        <span>Botchain / Bohr Official</span>
+                        <span>Botchain Official Portal</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </li>
