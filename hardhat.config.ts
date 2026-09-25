@@ -21,10 +21,8 @@ const config: HardhatUserConfig = {
       },
     },
   },
+  defaultNetwork: "botchain",
   networks: {
-    hardhat: {
-      chainId: 31337,
-    },
     botchain: {
       url: BOTCHAIN_RPC_URL,
       chainId: BOTCHAIN_CHAIN_ID,
