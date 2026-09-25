@@ -1,0 +1,1466 @@
+<!-- Synced from root whitepaper.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BotLaunch — Whitepaper & Pitch Deck</title>
+  <meta name="description" content="Technical Whitepaper and Executive Pitch Deck for BotLaunch: The native decentralized token launchpad built for the Botchain ecosystem." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #080b11;
+      --surface-dark: #0f172a;
+      --surface-card: #131d35;
+      --surface-border: #1e293b;
+      --primary: #38bdf8;
+      --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+      --accent-green: #10b981;
+      --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 11, 17, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    }
+
+    .brand-text {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      font-size: 0.7rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .tab-pill-group {
+      background: #0f172a;
+      border: 1px solid var(--surface-border);
+      border-radius: 30px;
+      padding: 3px;
+      display: flex;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-action {
+      background: #1e293b;
+      color: var(--text-main);
+      border: 1px solid #334155;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      background: #334155;
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .btn-action.btn-primary {
+      background: var(--primary-gradient);
+      border: none;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-action.btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ========================================================
+       WHITEPAPER VIEW STYLES
+       ======================================================== */
+    #view-whitepaper {
+      display: block;
+    }
+
+    .wp-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3rem;
+      position: relative;
+    }
+
+    .wp-sidebar {
+      position: sticky;
+      top: 5.5rem;
+      height: calc(100vh - 7rem);
+      overflow-y: auto;
+      padding-right: 1rem;
+    }
+
+    .wp-toc-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .wp-toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .wp-toc-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      display: block;
+      transition: all 0.15s;
+    }
+
+    .wp-toc-link:hover, .wp-toc-link.active {
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.08);
+      font-weight: 500;
+    }
+
+    .wp-content {
+      background: #0c1220;
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 3.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .wp-cover {
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .wp-meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(30, 41, 59, 0.8);
+      border-radius: 10px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .wp-meta-item strong {
+      color: var(--text-main);
+    }
+
+    .wp-title {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .wp-subtitle {
+      font-size: 1.25rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .wp-section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 5.5rem;
+    }
+
+    .wp-section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .wp-section h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .wp-section p {
+      color: #cbd5e1;
+      margin-bottom: 1.1rem;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .wp-card {
+      background: #111a2e;
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .wp-callout {
+      border-left: 4px solid var(--primary);
+      background: rgba(56, 189, 248, 0.05);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 10px 10px 0;
+      margin: 1.5rem 0;
+    }
+
+    .wp-callout p {
+      margin: 0;
+      color: #e2e8f0;
+    }
+
+    .wp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .wp-table th {
+      background: #162238;
+      color: #f8fafc;
+      padding: 0.85rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid var(--surface-border);
+    }
+
+    .wp-table td {
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--surface-border);
+      color: #cbd5e1;
+    }
+
+    .wp-table tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .math-box {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      padding: 1.25rem;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: #38bdf8;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .badge-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* ========================================================
+       PITCH DECK VIEW STYLES
+       ======================================================== */
+    #view-pitchdeck {
+      display: none;
+    }
+
+    .deck-container {
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .slide {
+      display: none;
+      background: radial-gradient(circle at 10% 20%, #131d35 0%, #0a0e1a 90%);
+      border: 1px solid #1e293b;
+      border-radius: 20px;
+      min-height: 580px;
+      padding: 3.5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-category {
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: #fff;
+    }
+
+    .slide-body {
+      flex: 1;
+    }
+
+    .slide-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* Deck Controls */
+    .deck-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #0f172a;
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+    }
+
+    .deck-nav-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .deck-nav-btn:hover:not(:disabled) {
+      background: var(--primary);
+      color: #080b11;
+      border-color: var(--primary);
+    }
+
+    .deck-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .slide-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .slide-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #334155;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .slide-dot.active {
+      background: var(--primary);
+      width: 24px;
+      border-radius: 10px;
+    }
+
+    /* Cards in Deck */
+    .deck-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .deck-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .deck-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: transform 0.2s;
+    }
+
+    .deck-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .deck-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+
+    .deck-card h4 {
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .deck-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .stat-highlight {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========================================================
+       PRINT OPTIMIZATION (@media print)
+       ======================================================== */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 10.5pt;
+      }
+
+      header, .wp-sidebar, .deck-controls, .tab-pill-group, .btn-action, .slide-dots {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .wp-layout {
+        display: block !important;
+      }
+
+      .wp-content {
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: #0f172a !important;
+      }
+
+      .wp-title {
+        color: #0f172a !important;
+        -webkit-text-fill-color: #0f172a !important;
+      }
+
+      .wp-subtitle {
+        color: #0284c7 !important;
+      }
+
+      .wp-section h2 {
+        color: #0f172a !important;
+        border-bottom: 1px solid #cbd5e1 !important;
+        page-break-after: avoid;
+      }
+
+      .wp-section h3 {
+        color: #1e293b !important;
+        page-break-after: avoid;
+      }
+
+      .wp-section p, .wp-table td {
+        color: #334155 !important;
+      }
+
+      .wp-meta-bar {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #475569 !important;
+      }
+
+      .wp-meta-item strong {
+        color: #0f172a !important;
+      }
+
+      .wp-card {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        page-break-inside: avoid;
+      }
+
+      .wp-callout {
+        background: #f0f9ff !important;
+        border-left: 4px solid #0284c7 !important;
+      }
+
+      .wp-table th {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .wp-table td {
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .math-box {
+        background: #f8fafc !important;
+        color: #0369a1 !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .wp-section {
+        page-break-inside: auto;
+      }
+
+      /* Slide print formatting */
+      #view-pitchdeck .slide {
+        display: block !important;
+        page-break-after: always;
+        min-height: auto;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: none !important;
+        margin-bottom: 2rem;
+      }
+
+      #view-pitchdeck .slide-title {
+        color: #0f172a !important;
+      }
+
+      #view-pitchdeck .deck-card {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+      }
+
+      #view-pitchdeck .deck-card h4 {
+        color: #0f172a !important;
+      }
+
+      #view-pitchdeck .deck-card p {
+        color: #475569 !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .wp-layout {
+        grid-template-columns: 1fr;
+      }
+      .wp-sidebar {
+        display: none;
+      }
+      .wp-content {
+        padding: 2rem 1.25rem;
+      }
+      .deck-grid-3, .deck-grid-2, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .slide {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <a href="#" class="brand">
+      <div class="brand-logo">🚀</div>
+      <div>
+        <span class="brand-text">BOTLAUNCH</span>
+        <span class="brand-badge">Botchain Mainnet 677</span>
+      </div>
+    </a>
+
+    <div class="nav-controls">
+      <div class="tab-pill-group">
+        <button id="btn-tab-whitepaper" class="tab-btn active" onclick="switchView('whitepaper')">
+          📄 Whitepaper
+        </button>
+        <button id="btn-tab-pitchdeck" class="tab-btn" onclick="switchView('pitchdeck')">
+          📊 Pitch Deck
+        </button>
+      </div>
+
+      <button class="btn-action btn-primary" onclick="window.print()" title="Print or save as high-quality PDF">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+        </svg>
+        Save as PDF / Print
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ========================================================
+         VIEW 1: WHITEPAPER
+         ======================================================== -->
+    <div id="view-whitepaper">
+      <div class="wp-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="wp-sidebar">
+          <div class="wp-toc-title">Table of Contents</div>
+          <ul class="wp-toc-list">
+            <li><a href="#wp-abstract" class="wp-toc-link">1. Abstract & Overview</a></li>
+            <li><a href="#wp-problem" class="wp-toc-link">2. The Problem</a></li>
+            <li><a href="#wp-solution" class="wp-toc-link">3. The BotLaunch Solution</a></li>
+            <li><a href="#wp-architecture" class="wp-toc-link">4. Architecture & Escrow</a></li>
+            <li><a href="#wp-pricing" class="wp-toc-link">5. Pricing & Math Engine</a></li>
+            <li><a href="#wp-security" class="wp-toc-link">6. Security & Verification</a></li>
+            <li><a href="#wp-ux" class="wp-toc-link">7. Investor & Creator UX</a></li>
+            <li><a href="#wp-tokenomics" class="wp-toc-link">8. Tokenomics & Flywheel</a></li>
+            <li><a href="#wp-roadmap" class="wp-toc-link">9. Phased Roadmap</a></li>
+            <li><a href="#wp-contracts" class="wp-toc-link">10. Contract Addresses</a></li>
+          </ul>
+        </aside>
+
+        <!-- Whitepaper Document Content -->
+        <article class="wp-content">
+          <!-- Cover -->
+          <div class="wp-cover">
+            <h1 class="wp-title">BOTLAUNCH WHITEPAPER</h1>
+            <p class="wp-subtitle">Decentralized, Non-Custodial Token Launchpad & Escrow Engine on Botchain</p>
+            <div class="wp-meta-bar">
+              <div class="wp-meta-item">Document Version: <strong>v1.0.0</strong></div>
+              <div class="wp-meta-item">Network: <strong>Botchain Mainnet (Chain ID 677)</strong></div>
+              <div class="wp-meta-item">Currency: <strong>Native BOT (18 decimals)</strong></div>
+              <div class="wp-meta-item">Status: <strong>Production-Ready Protocol</strong></div>
+            </div>
+          </div>
+
+          <!-- Section 1 -->
+          <section id="wp-abstract" class="wp-section">
+            <h2>1. Abstract & Executive Summary</h2>
+            <p>
+              As decentralized ecosystems expand, trustless capital formation remains the foundational catalyst for developer adoption and liquidity growth. <strong>BotLaunch</strong> is the native decentralized token launchpad built specifically for the <strong>Botchain ecosystem</strong>.
+            </p>
+            <p>
+              Engineered to resolve the rampant vulnerabilities of unregulated presales, BotLaunch operates as a strictly non-custodial escrow platform. Project creators deploy standard ERC-20 tokens via an on-chain wizard and launch sales with customizable parameters (soft caps, hard caps, durations, and contribution limits). Investors commit native <strong>BOT</strong> with mathematical guarantees: <strong>1-click token claims</strong> upon sale success, or an <strong>automated 100% BOT refund</strong> directly from the smart contract if a project fails to achieve its soft cap.
+            </p>
+            <div class="wp-callout">
+              <p><strong>Core Axiom:</strong> Zero custodian discretion. Zero simulated transactions. All states, funds, and token distributions are governed exclusively by immutable smart contract code.</p>
+            </div>
+          </section>
+
+          <!-- Section 2 -->
+          <section id="wp-problem" class="wp-section">
+            <h2>2. The Problem Statement</h2>
+            <p>
+              Early-stage fundraising in nascent blockchain ecosystems faces systemic friction that harms both builders and investors:
+            </p>
+            <div class="grid-2">
+              <div class="wp-card">
+                <h4 style="color: #f87171; margin-bottom: 0.5rem;">⚠️ Custodial Rugpull Risks</h4>
+                <p>In standard informal presales, investors send funds directly to developer EOAs (Externally Owned Accounts). If the project underperforms or creators abandon ship, contributors face 100% capital loss with zero recourse.</p>
+              </div>
+              <div class="wp-card">
+                <h4 style="color: #fbbf24; margin-bottom: 0.5rem;">⚠️ Friction in Token Deployment</h4>
+                <p>Emerging developers often lack audited contract templates, resulting in non-standard ERC-20 tokens with vulnerabilities, unverified code, or broken transfer logic.</p>
+              </div>
+              <div class="wp-card">
+                <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">⚠️ No Automated Refund Rails</h4>
+                <p>When funding targets fail to reach viability thresholds, developers rarely execute manual refunds, locking investor liquidity indefinitely.</p>
+              </div>
+              <div class="wp-card">
+                <h4 style="color: #a855f7; margin-bottom: 0.5rem;">⚠️ Whale Manipulation</h4>
+                <p>Without on-chain per-wallet contribution minimums and maximums, automated bots and whales siphon token supply, distorting healthy decentralized distribution.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3 -->
+          <section id="wp-solution" class="wp-section">
+            <h2>3. The BotLaunch Solution</h2>
+            <p>
+              BotLaunch establishes an institutional-grade, decentralized launch standard on Botchain through four pillars:
+            </p>
+            <table class="wp-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Mechanism</th>
+                  <th>Benefit to Stakeholders</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Non-Custodial Escrow</strong></td>
+                  <td>Tokens locked in <code>BotLaunchpad.sol</code> prior to sale commencement.</td>
+                  <td>Eliminates counterparty risk; tokens guaranteed to exist.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dual-Cap Thresholds</strong></td>
+                  <td>Automated Soft Cap (viability) and Hard Cap (maximum ceiling).</td>
+                  <td>Ensures underfunded projects do not trap investor capital.</td>
+                </tr>
+                <tr>
+                  <td><strong>100% Refund Guarantee</strong></td>
+                  <td>If Soft Cap is missed at deadline, <code>claimRefund()</code> executes fee-free.</td>
+                  <td>Complete downside protection for community participants.</td>
+                </tr>
+                <tr>
+                  <td><strong>Anti-Whale Guardrails</strong></td>
+                  <td>Contract enforces <code>minContribution</code> & <code>maxContribution</code> per address.</td>
+                  <td>Democratizes token holder distribution.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Section 4 -->
+          <section id="wp-architecture" class="wp-section">
+            <h2>4. Smart Contract Architecture & Lifecycle</h2>
+            <p>
+              The BotLaunch protocol architecture consists of two tightly coupled smart contract modules:
+            </p>
+            <div class="math-box">
+contracts/
+├── BotToken.sol      # Standard OpenZeppelin ERC-20 project token implementation
+└── BotLaunchpad.sol  # Non-custodial escrow, accounting & distribution engine
+            </div>
+
+            <h3>The On-Chain Sale Lifecycle</h3>
+            <p>Every sale transitions through deterministic, verifiable states:</p>
+            <div class="wp-card">
+              <ol style="padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; color: #cbd5e1;">
+                <li><strong>Creation & Solvency Lock:</strong> Creator deploys token, approves launchpad, and defines sale configuration. The launchpad transfers and locks the required token allocation into escrow.</li>
+                <li><strong>Public Contribution Window:</strong> Investors contribute native BOT within the authorized timestamp range (<code>startTime</code> to <code>endTime</code>).</li>
+                <li><strong>Finalization Trigger:</strong> Once <code>hardCap</code> is attained or <code>endTime</code> lapses, the creator or protocol finalizes the sale.</li>
+                <li><strong>Settlement Branch:</strong>
+                  <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+                    <li><strong>If Soft Cap Reached (Success):</strong> Contributors call <code>claimTokens()</code>. Creator executes <code>withdrawFunds()</code> to receive raised BOT, plus <code>withdrawUnsoldTokens()</code> if hard cap wasn't fully reached.</li>
+                    <li><strong>If Soft Cap Missed (Failed):</strong> Contributors call <code>claimRefund()</code> to withdraw 100% of their deposited BOT. Creator reclaims all escrowed tokens via <code>withdrawUnsoldTokens()</code>.</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- Section 5 -->
+          <section id="wp-pricing" class="wp-section">
+            <h2>5. Pricing & Mathematical Engine</h2>
+            <p>
+              The pricing engine is implemented in pure integer arithmetic in Solidity <code>^0.8.24</code>, preventing rounding inaccuracies, precision loss, and overflow vulnerabilities.
+            </p>
+
+            <h3>Allocation Calculation Formula</h3>
+            <p>
+              The token allocation for any contributor committing <code>msg.value</code> native BOT is defined as:
+            </p>
+            <div class="math-box">
+tokenAllocation = (msg.value * 10^tokenDecimals) / tokenPrice
+            </div>
+            <p>
+              Where <code>tokenPrice</code> denotes the cost in native BOT wei required to purchase 1.0 whole project token (10<sup>18</sup> base units).
+            </p>
+
+            <h3>Strict Escrow Solvency Invariant</h3>
+            <p>
+              To guarantee that the smart contract can never be insolvent or unable to fulfill user claims, sale creation strictly enforces the solvency inequality:
+            </p>
+            <div class="math-box">
+escrowTokenAmount >= (hardCap * 10^tokenDecimals) / tokenPrice
+            </div>
+            <p>Any attempt to initialize a sale without locking sufficient tokens immediately reverts.</p>
+          </section>
+
+          <!-- Section 6 -->
+          <section id="wp-security" class="wp-section">
+            <h2>6. Security Specifications & Verification</h2>
+            <p>
+              The protocol enforces rigorous industry security standards:
+            </p>
+            <div class="grid-2">
+              <div class="wp-card">
+                <h4>🛡️ Reentrancy Protection</h4>
+                <p>Every state-modifying external function utilizes OpenZeppelin's battle-tested <code>ReentrancyGuard</code>.</p>
+              </div>
+              <div class="wp-card">
+                <h4>🔒 Checks-Effects-Interactions</h4>
+                <p>Internal accounting flags (<code>claimed</code>, <code>refunded</code>, <code>fundsWithdrawn</code>) are updated prior to any token or native BOT transfer.</p>
+              </div>
+              <div class="wp-card">
+                <h4>⚡ SafeERC20 Transfers</h4>
+                <p>Wrapped transfer primitives prevent silent reverts or non-compliant ERC-20 return values from freezing escrow state.</p>
+              </div>
+              <div class="wp-card">
+                <h4>🧪 25-Scenario Hardhat Test Suite</h4>
+                <p>Comprehensive unit and integration test suite verifying lifecycle transitions, edge cases, timing boundaries, and stress bounds.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 7 -->
+          <section id="wp-ux" class="wp-section">
+            <h2>7. Investor & Creator Experience (UX)</h2>
+            <p>
+              BotLaunch eliminates the clunky, opaque UX often found in decentralized finance:
+            </p>
+            <ul style="padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: #cbd5e1;">
+              <li><strong>7-State Transaction Modal:</strong> Transparent UX displaying <code>Idle</code> → <code>Preparing</code> → <code>Awaiting Wallet</code> → <code>Broadcasting</code> → <code>Confirming</code> → <code>Success</code> / <code>Error</code> with direct BotChain Explorer links.</li>
+              <li><strong>Live Dual-Tier Progress Bars:</strong> Dynamic UI displaying real-time BOT raised against both the soft cap threshold and hard cap ceiling.</li>
+              <li><strong>Allocation Calculator:</strong> Instant live conversion displaying exact token yield for any prospective BOT contribution.</li>
+              <li><strong>Network Guard:</strong> Automatic chain detection prompting a 1-click addition and switch to Botchain Mainnet (Chain ID 677).</li>
+            </ul>
+          </section>
+
+          <!-- Section 8 -->
+          <section id="wp-tokenomics" class="wp-section">
+            <h2>8. Protocol Economics & Ecosystem Flywheel</h2>
+            <p>
+              BotLaunch aligns incentives across creators, investors, and the Botchain network:
+            </p>
+            <table class="wp-table">
+              <thead>
+                <tr>
+                  <th>Stakeholder</th>
+                  <th>Role</th>
+                  <th>Incentive & Value Accrual</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Project Builders</strong></td>
+                  <td>Deploy tokens & raise capital</td>
+                  <td>Instant liquidity, automated distribution, zero upfront listing fees.</td>
+                </tr>
+                <tr>
+                  <td><strong>Community Investors</strong></td>
+                  <td>Provide native BOT funding</td>
+                  <td>Guaranteed token delivery or 100% refund; anti-whale fairness.</td>
+                </tr>
+                <tr>
+                  <td><strong>Botchain Ecosystem</strong></td>
+                  <td>Underlying Layer-1 network</td>
+                  <td>Increased on-chain transaction volume, gas utilization, and ecosystem TVL.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Section 9 -->
+          <section id="wp-roadmap" class="wp-section">
+            <h2>9. Phased Development Roadmap</h2>
+            <div class="wp-card">
+              <h4 style="color: #38bdf8;">Phase 1: Core Launchpad Engine (Current Release ✅)</h4>
+              <p>On-chain ERC-20 token deployment wizard, non-custodial escrow, dual-cap sales, 1-click claims/refunds, BotChain Explorer integration, and investor portfolio.</p>
+            </div>
+            <div class="wp-card">
+              <h4 style="color: #a855f7;">Phase 2: Advanced Vesting & Governance (Upcoming)</h4>
+              <p>Linear and cliff token vesting contracts, Merkle-tree whitelist allocations for community rounds, and tiered staking tiers.</p>
+            </div>
+            <div class="wp-card">
+              <h4 style="color: #10b981;">Phase 3: Identity & Reputation</h4>
+              <p>BotNS (<code>.bot</code>) decentralized naming integration, creator on-chain trust scores, and DAO-governed community featured sales.</p>
+            </div>
+            <div class="wp-card">
+              <h4 style="color: #f59e0b;">Phase 4: Liquidity Expansion</h4>
+              <p>Automated DEX liquidity pool bootstrapping upon sale finalization, Dutch auction mechanics, and cross-chain bridging.</p>
+            </div>
+          </section>
+
+          <!-- Section 10 -->
+          <section id="wp-contracts" class="wp-section">
+            <h2>10. Verified Contract Addresses & Network Setup</h2>
+            <table class="wp-table">
+              <thead>
+                <tr>
+                  <th>Parameter / Contract</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Network Name</strong></td>
+                  <td>Botchain Mainnet</td>
+                </tr>
+                <tr>
+                  <td><strong>Chain ID</strong></td>
+                  <td><code>677</code> (0x2A5)</td>
+                </tr>
+                <tr>
+                  <td><strong>Native Token</strong></td>
+                  <td><code>BOT</code> (18 decimals)</td>
+                </tr>
+                <tr>
+                  <td><strong>Total Supply</strong></td>
+                  <td><code>150 Million BOT</code></td>
+                </tr>
+                <tr>
+                  <td><strong>RPC Endpoint</strong></td>
+                  <td><code>https://rpc.botchain.ai</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Block Explorer</strong></td>
+                  <td><code>https://scan.botchain.ai</code></td>
+                </tr>
+                <tr>
+                  <td><strong>BotLaunchpad Escrow Contract</strong></td>
+                  <td><code>0xA1d534dB780c2f82078A3204568289b4604eaFC3</code></td>
+                </tr>
+                <tr>
+                  <td><strong>BotToken (NOVA Reference)</strong></td>
+                  <td><code>0x7098adCB452De319A5971fA2da65AB00e3904651</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         VIEW 2: PITCH DECK (INTERACTIVE SLIDES)
+         ======================================================== -->
+    <div id="view-pitchdeck">
+      <div class="deck-container">
+        
+        <!-- Slide 1: Cover -->
+        <div class="slide active" data-slide="1">
+          <div class="slide-header">
+            <div class="slide-category">Executive Pitch Deck</div>
+            <h2 class="slide-title">BOTLAUNCH</h2>
+            <p style="color: var(--primary); font-size: 1.25rem; font-weight: 600; margin-top: 0.5rem;">
+              Launch. Fund. Build. The Native Token Launchpad for Botchain.
+            </p>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-3" style="margin-top: 2rem;">
+              <div class="deck-card">
+                <div class="deck-icon">🛡️</div>
+                <h4>100% Non-Custodial</h4>
+                <p>Direct smart contract escrow with automated solvency validation and zero admin keys.</p>
+              </div>
+              <div class="deck-card">
+                <div class="deck-icon">💎</div>
+                <h4>Guaranteed Protection</h4>
+                <p>Automated token claiming upon success, and guaranteed 100% BOT refund upon missed soft caps.</p>
+              </div>
+              <div class="deck-card">
+                <div class="deck-icon">⚡</div>
+                <h4>3-Step Launch Wizard</h4>
+                <p>Empowers any builder to deploy an audited ERC-20 token and initialize sales in under 3 minutes.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>Botchain Mainnet (Chain ID 677)</span>
+            <span>Slide 1 of 8</span>
+          </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide" data-slide="2">
+          <div class="slide-header">
+            <div class="slide-category">Market Reality</div>
+            <h2 class="slide-title">The Early-Stage Presale Problem</h2>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-3">
+              <div class="deck-card" style="border-color: rgba(239, 68, 68, 0.3);">
+                <div class="deck-icon">❌</div>
+                <h4 style="color: #f87171;">Manual & High Risk</h4>
+                <p>Investors send funds to personal developer wallets with zero legal or technical recourse against abandonment.</p>
+              </div>
+              <div class="deck-card" style="border-color: rgba(245, 158, 11, 0.3);">
+                <div class="deck-icon">📉</div>
+                <h4 style="color: #fbbf24;">No Refund Mechanism</h4>
+                <p>Projects failing to reach their minimum viability trap user funds with no trustless refund protocol.</p>
+              </div>
+              <div class="deck-card" style="border-color: rgba(168, 85, 247, 0.3);">
+                <div class="deck-icon">🐋</div>
+                <h4 style="color: #c084fc;">Whale Predation</h4>
+                <p>Lack of enforceable on-chain contribution caps allows sniper bots to monopolize allocations.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>The Problem</span>
+            <span>Slide 2 of 8</span>
+          </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide" data-slide="3">
+          <div class="slide-header">
+            <div class="slide-category">Value Proposition</div>
+            <h2 class="slide-title">The BotLaunch Solution</h2>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-2">
+              <div class="deck-card">
+                <div class="stat-highlight">100%</div>
+                <div class="stat-label">Automated Escrow Refund Guarantee</div>
+                <p style="margin-top: 1rem;">If a sale does not meet its soft cap threshold at deadline, contributors execute <code>claimRefund()</code> directly on-chain. Zero developer approval needed.</p>
+              </div>
+              <div class="deck-card">
+                <div class="stat-highlight">3 Min</div>
+                <div class="stat-label">Zero-to-Launch Developer Pipeline</div>
+                <p style="margin-top: 1rem;">Deploy standard OpenZeppelin ERC-20 tokens, approve escrow, and configure soft/hard caps, pricing, and timelines seamlessly.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>The Solution</span>
+            <span>Slide 3 of 8</span>
+          </div>
+        </div>
+
+        <!-- Slide 4: Product -->
+        <div class="slide" data-slide="4">
+          <div class="slide-header">
+            <div class="slide-category">Live Application</div>
+            <h2 class="slide-title">Core Product Suite</h2>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-3">
+              <div class="deck-card">
+                <div class="deck-icon">🧙‍♂️</div>
+                <h4>Launch Wizard (`/launch`)</h4>
+                <p>3-step guided flow: token compilation, escrow approval, and immutable on-chain sale creation.</p>
+              </div>
+              <div class="deck-card">
+                <div class="deck-icon">🧭</div>
+                <h4>Sales Terminal (`/sales/[id]`)</h4>
+                <p>Live countdown timers, dual-tier progress bars, dynamic allocation calculator, and 1-click BOT buys.</p>
+              </div>
+              <div class="deck-card">
+                <div class="deck-icon">💼</div>
+                <h4>Portfolio Hub (`/portfolio`)</h4>
+                <p>Unified investor dashboard tracking claims, refunds, committed BOT, and creator management tools.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>Product Architecture</span>
+            <span>Slide 4 of 8</span>
+          </div>
+        </div>
+
+        <!-- Slide 5: Security -->
+        <div class="slide" data-slide="5">
+          <div class="slide-header">
+            <div class="slide-category">Engineering Rigor</div>
+            <h2 class="slide-title">Institutional Security Architecture</h2>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-2">
+              <div class="deck-card">
+                <h4>🛡️ Smart Contract Defense</h4>
+                <ul style="padding-left: 1.25rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                  <li>OpenZeppelin <strong>ReentrancyGuard</strong> on all financial paths</li>
+                  <li><strong>SafeERC20</strong> preventing token transfer revert anomalies</li>
+                  <li><strong>Checks-Effects-Interactions</strong> strict ordering</li>
+                  <li>Solvency invariant: <code>tokens >= (hardCap / price)</code></li>
+                </ul>
+              </div>
+              <div class="deck-card">
+                <h4>🧪 Test Suite Coverage</h4>
+                <ul style="padding-left: 1.25rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                  <li><strong>25 comprehensive test scenarios</strong> in Hardhat</li>
+                  <li>Full lifecycle verification (success vs failed paths)</li>
+                  <li>Time-travel simulation (before, during, after sales)</li>
+                  <li>Boundary testing for whale and minimum contribution limits</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>Security & Reliability</span>
+            <span>Slide 5 of 8</span>
+          </div>
+        </div>
+
+        <!-- Slide 6: Market Opportunity -->
+        <div class="slide" data-slide="6">
+          <div class="slide-header">
+            <div class="slide-category">Ecosystem Fit</div>
+            <h2 class="slide-title">Market Opportunity on Botchain</h2>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-3">
+              <div class="deck-card">
+                <div class="stat-highlight">1st</div>
+                <div class="stat-label">Mover Advantage</div>
+                <p style="margin-top: 0.75rem;">First dedicated native launchpad infrastructure tailored directly for Botchain Mainnet.</p>
+              </div>
+              <div class="deck-card">
+                <div class="stat-highlight">100%</div>
+                <div class="stat-label">Ecosystem Alignment</div>
+                <p style="margin-top: 0.75rem;">Uses native BOT currency for all contributions, driving organic utility and on-chain velocity.</p>
+              </div>
+              <div class="deck-card">
+                <div class="stat-highlight">∞</div>
+                <div class="stat-label">Builder Expansion</div>
+                <p style="margin-top: 0.75rem;">Lowering the technical barrier to entry for hundreds of upcoming DeFi, gaming, and AI agents on Botchain.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>Market Opportunity</span>
+            <span>Slide 6 of 8</span>
+          </div>
+        </div>
+
+        <!-- Slide 7: Roadmap -->
+        <div class="slide" data-slide="7">
+          <div class="slide-header">
+            <div class="slide-category">Milestones</div>
+            <h2 class="slide-title">Protocol Roadmap</h2>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-2">
+              <div class="deck-card">
+                <div class="badge-check" style="margin-bottom: 0.75rem;">PHASE 1 (COMPLETED)</div>
+                <h4>Core Launchpad MVP</h4>
+                <p>Non-custodial escrow, ERC-20 wizard, dual caps, live countdowns, 100% refunds, and full test suite.</p>
+              </div>
+              <div class="deck-card">
+                <div class="badge-check" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; margin-bottom: 0.75rem;">PHASE 2 (UPCOMING)</div>
+                <h4>Vesting & Whitelists</h4>
+                <p>Cliff + linear token vesting schedules, Merkle-root whitelist rounds, and staking tier allocations.</p>
+              </div>
+              <div class="deck-card">
+                <div class="badge-check" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; margin-bottom: 0.75rem;">PHASE 3</div>
+                <h4>BotNS & Reputation</h4>
+                <p>Integration with <code>.bot</code> decentralized domain names and on-chain creator track records.</p>
+              </div>
+              <div class="deck-card">
+                <div class="badge-check" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; margin-bottom: 0.75rem;">PHASE 4</div>
+                <h4>Automated Liquidity Bootstrapping</h4>
+                <p>Auto-liquidity deployment to Botchain DEXs upon finalization, plus Dutch auctions.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>Strategic Roadmap</span>
+            <span>Slide 7 of 8</span>
+          </div>
+        </div>
+
+        <!-- Slide 8: The Ask & Call to Action -->
+        <div class="slide" data-slide="8">
+          <div class="slide-header">
+            <div class="slide-category">Get Involved</div>
+            <h2 class="slide-title">Join the BotLaunch Ecosystem</h2>
+          </div>
+          <div class="slide-body">
+            <div class="deck-grid-2" style="margin-top: 1rem;">
+              <div class="deck-card">
+                <h4>🌐 Network & Deployment</h4>
+                <p style="margin-top: 0.5rem; line-height: 1.8;">
+                  <strong>Network:</strong> Botchain Mainnet (Chain ID 677)<br>
+                  <strong>Total Supply:</strong> 150 Million BOT<br>
+                  <strong>RPC:</strong> https://rpc.botchain.ai<br>
+                  <strong>Explorer:</strong> https://scan.botchain.ai<br>
+                  <strong>Escrow:</strong> <code>0xA1d534dB780c2f82078A3204568289b4604eaFC3</code>
+                </p>
+              </div>
+              <div class="deck-card">
+                <h4>🚀 Start Launching Today</h4>
+                <p style="margin-top: 0.5rem;">
+                  BotLaunch is live and ready for builders and investors to experience institutional-grade capital formation on Botchain.
+                </p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+                  <button class="btn-action btn-primary" onclick="window.print()">
+                    📄 Download Deck (PDF)
+                  </button>
+                  <button class="btn-action" onclick="switchView('whitepaper')">
+                    Read Technical Paper
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>Conclusion</span>
+            <span>Slide 8 of 8</span>
+          </div>
+        </div>
+
+        <!-- Deck Controls -->
+        <div class="deck-controls">
+          <button id="deck-prev-btn" class="deck-nav-btn" onclick="prevSlide()" disabled>
+            ← Previous Slide
+          </button>
+
+          <div class="slide-dots" id="slide-dots">
+            <!-- Rendered by JS -->
+          </div>
+
+          <button id="deck-next-btn" class="deck-nav-btn" onclick="nextSlide()">
+            Next Slide →
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Tab Switching
+    function switchView(view) {
+      const wpView = document.getElementById('view-whitepaper');
+      const pdView = document.getElementById('view-pitchdeck');
+      const wpTab = document.getElementById('btn-tab-whitepaper');
+      const pdTab = document.getElementById('btn-tab-pitchdeck');
+
+      if (view === 'pitchdeck') {
+        wpView.style.display = 'none';
+        pdView.style.display = 'block';
+        wpTab.classList.remove('active');
+        pdTab.classList.add('active');
+        initSlideDots();
+      } else {
+        wpView.style.display = 'block';
+        pdView.style.display = 'none';
+        wpTab.classList.add('active');
+        pdTab.classList.remove('active');
+      }
+    }
+
+    // Pitch Deck Slides Logic
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    function initSlideDots() {
+      const dotsContainer = document.getElementById('slide-dots');
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = `slide-dot ${i === currentSlide ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function showSlide(slideNum) {
+      currentSlide = slideNum;
+      document.querySelectorAll('.slide').forEach(slide => {
+        slide.classList.remove('active');
+      });
+      const activeSlide = document.querySelector(`.slide[data-slide="${slideNum}"]`);
+      if (activeSlide) activeSlide.classList.add('active');
+
+      document.getElementById('deck-prev-btn').disabled = (slideNum === 1);
+      document.getElementById('deck-next-btn').disabled = (slideNum === totalSlides);
+
+      initSlideDots();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function goToSlide(num) {
+      showSlide(num);
+    }
+
+    // Keyboard support for pitch deck
+    window.addEventListener('keydown', (e) => {
+      const pdView = document.getElementById('view-pitchdeck');
+      if (pdView && pdView.style.display === 'block') {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+          prevSlide();
+        }
+      }
+    });
+
+    // TOC Active State on Scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.wp-section');
+      const scrollPos = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        if (scrollPos >= top && scrollPos < top + height) {
+          document.querySelectorAll('.wp-toc-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+
+    initSlideDots();
+  </script>
+</body>
+</html>

@@ -34,8 +34,8 @@ export default function DocsPage() {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x3C8", // 968 in hex
-            chainName: "Botchain Testnet",
+            chainId: `0x${BOTCHAIN_CHAIN_ID.toString(16)}`,
+            chainName: "Botchain",
             nativeCurrency: {
               name: "BOT",
               symbol: "BOT",
@@ -66,7 +66,7 @@ export default function DocsPage() {
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
           Technical specifications, smart contract architecture, token pricing mechanics, and
-          network setup for BotLaunch on Botchain Testnet.
+          network setup for BotLaunch on Botchain Mainnet.
         </p>
       </div>
 
@@ -76,10 +76,10 @@ export default function DocsPage() {
           <div>
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <Cpu className="w-5 h-5 text-primary" />
-              <span>Connect to Botchain Testnet</span>
+              <span>Connect to Botchain Mainnet</span>
             </h2>
             <p className="text-xs text-slate-300 mt-1">
-              Add the official Botchain Testnet RPC configuration to your MetaMask or Web3 wallet.
+              Add the official Botchain Mainnet RPC configuration to your MetaMask or Web3 wallet.
             </p>
           </div>
 
@@ -107,22 +107,30 @@ export default function DocsPage() {
           </p>
         )}
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs pt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 font-mono text-xs pt-2">
           <div className="p-3 rounded-xl bg-surface border border-surface-border">
             <span className="text-slate-500 text-[10px] block">Network Name</span>
-            <span className="text-white font-semibold">Botchain Testnet</span>
+            <span className="text-white font-semibold">Botchain Mainnet</span>
           </div>
           <div className="p-3 rounded-xl bg-surface border border-surface-border">
             <span className="text-slate-500 text-[10px] block">Chain ID</span>
-            <span className="text-primary font-bold">968</span>
+            <span className="text-primary font-bold">{BOTCHAIN_CHAIN_ID}</span>
           </div>
           <div className="p-3 rounded-xl bg-surface border border-surface-border">
             <span className="text-slate-500 text-[10px] block">Native Currency</span>
-            <span className="text-white font-semibold">BOT (18 decimals)</span>
+            <span className="text-white font-semibold">BOT (18 dec)</span>
+          </div>
+          <div className="p-3 rounded-xl bg-surface border border-surface-border">
+            <span className="text-slate-500 text-[10px] block">Total Supply</span>
+            <span className="text-emerald-400 font-semibold">150M BOT</span>
           </div>
           <div className="p-3 rounded-xl bg-surface border border-surface-border">
             <span className="text-slate-500 text-[10px] block">RPC Endpoint</span>
-            <span className="text-slate-300 truncate block">rpc.bohr.life</span>
+            <span className="text-slate-300 truncate block">{BOTCHAIN_RPC_URL.replace(/^https?:\/\//, "")}</span>
+          </div>
+          <div className="p-3 rounded-xl bg-surface border border-surface-border">
+            <span className="text-slate-500 text-[10px] block">Explorer</span>
+            <span className="text-slate-300 truncate block">{BOTCHAIN_EXPLORER_URL.replace(/^https?:\/\//, "")}</span>
           </div>
         </div>
       </div>

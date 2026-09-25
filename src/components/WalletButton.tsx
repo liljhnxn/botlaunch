@@ -90,7 +90,7 @@ export function WalletButton() {
             className="flex items-center gap-2 px-4 py-2.5 text-xs text-slate-300 hover:text-primary hover:bg-white/5 transition-colors"
           >
             <ExternalLink className="w-3.5 h-3.5" />
-            <span>View on BohrScan</span>
+            <span>View on BotChain Explorer</span>
           </a>
 
           <button

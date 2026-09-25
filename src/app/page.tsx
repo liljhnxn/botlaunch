@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useReadContract } from "wagmi";
-import { BOTLAUNCH_ADDRESS } from "@/contracts/addresses";
+import { BOTLAUNCH_ADDRESS, BOTCHAIN_CHAIN_ID } from "@/contracts/addresses";
 import BotLaunchpadArtifact from "@/contracts/BotLaunchpad.json";
 import { SaleCard, SaleData } from "@/components/SaleCard";
 import { formatEtherAmount, getSaleStatus } from "@/lib/format";
@@ -53,9 +53,9 @@ export default function HomePage() {
     <div className="space-y-24 py-6">
       {/* Hero Section */}
       <section className="relative text-center py-16 sm:py-24 overflow-hidden rounded-3xl bg-hero-glow border border-white/5 px-4 sm:px-8">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-dim border border-primary/30 text-primary text-xs font-mono mb-6 shadow-glow">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span>Botchain Testnet (Chain ID 968)</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-6 shadow-glow">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Botchain Mainnet (Chain ID {BOTCHAIN_CHAIN_ID})</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight sm:leading-none">
@@ -168,7 +168,7 @@ export default function HomePage() {
             <div>
               <h3 className="text-base font-semibold text-white">No Active Sales Yet</h3>
               <p className="text-xs text-slate-400 max-w-md mx-auto mt-1">
-                Be the pioneer! Deploy your ERC-20 project token and launch the first sale on Botchain Testnet.
+                Be the pioneer! Deploy your ERC-20 project token and launch the first sale on Botchain Mainnet.
               </p>
             </div>
             <Link

@@ -7,7 +7,7 @@
 
 ## 📌 Overview
 
-**BotLaunch** is a production-grade Web3 decentralized application (dApp) engineered for the **Botchain Testnet**. It enables developers and project creators to deploy custom ERC-20 project tokens and initiate non-custodial token sales with automated soft and hard caps. Investors and community members can participate directly using native **BOT**, with guaranteed on-chain token claiming upon sale success, or automated 100% BOT refunds if a sale fails to achieve its soft cap.
+**BotLaunch** is a production-grade Web3 decentralized application (dApp) engineered for **Botchain Mainnet**. It enables developers and project creators to deploy custom ERC-20 project tokens and initiate non-custodial token sales with automated soft and hard caps. Investors and community members can participate directly using native **BOT**, with guaranteed on-chain token claiming upon sale success, or automated 100% BOT refunds if a sale fails to achieve its soft cap.
 
 This application is connected directly to the blockchain via **Wagmi** and **Viem** with real smart contract transactions—**zero simulated data, zero fake balances, and zero hardcoded sales.**
 
@@ -18,19 +18,19 @@ This application is connected directly to the blockchain via **Wagmi** and **Vie
 * **3-Step Launch Wizard (`/launch`)**:
   1. Deploy standard OpenZeppelin ERC-20 project tokens directly from your wallet.
   2. Approve the launchpad escrow allocation.
-  3. Initialize the token sale on Botchain Testnet with custom caps, timelines, and rates.
+  3. Initialize the token sale on Botchain Mainnet with custom caps, timelines, and rates.
 * **Sales Explorer (`/sales`)**: Real-time listing of active, upcoming, successful, and concluded sales with dynamic search and status filtering.
 * **Interactive Sale Terminal (`/sales/[id]`)**:
   * Live status badges and real-time countdown clocks.
   * Visual progress bar indicating raised funds vs. soft cap and hard cap targets.
   * Real-time BOT-to-token allocation calculator.
-  * 7-step transaction UX (`Idle` → `Preparing` → `Awaiting Wallet` → `Pending` → `Confirming` → `Success` / `Error`) with direct BohrScan explorer links.
+  * 7-step transaction UX (`Idle` → `Preparing` → `Awaiting Wallet` → `Pending` → `Confirming` → `Success` / `Error`) with direct BotChain Explorer links.
   * Guaranteed 1-click token claiming for successful sales.
   * Guaranteed 1-click BOT refunds for missed soft cap sales.
   * Creator management suite for finalization, raised BOT withdrawal, and unsold token recovery.
 * **Investor Portfolio (`/portfolio`)**: Consolidated overview of connected wallet's participations, claimable assets, refundable sales, and created projects.
-* **Comprehensive Docs & Network Setup (`/docs`)**: Includes an interactive 1-click "Add Botchain Testnet to MetaMask" button, contract architecture guides, and roadmap.
-* **Network Guard**: Detects if the user's wallet is on the wrong chain and prompts a 1-click chain switch to Botchain Testnet (Chain ID 968).
+* **Comprehensive Docs & Network Setup (`/docs`)**: Includes an interactive 1-click "Add Botchain to MetaMask" button, contract architecture guides, and roadmap.
+* **Network Guard**: Detects if the user's wallet is on the wrong chain and prompts a 1-click chain switch to Botchain Mainnet (Chain ID 677).
 
 ---
 
@@ -102,15 +102,18 @@ All arithmetic is executed entirely on-chain using integer math in Solidity `^0.
 
 ---
 
-## 🌐 Botchain Testnet Configuration
+## 🌐 Botchain Mainnet Configuration
 
 | Parameter | Value |
 | :--- | :--- |
-| **Network Name** | Botchain Testnet (Bohr) |
-| **Chain ID** | `968` |
-| **RPC URL** | `https://rpc.bohr.life` |
-| **Explorer URL** | `https://scan.bohr.life` |
+| **Network Name** | Botchain Mainnet |
+| **Chain ID** | `677` (`0x2A5`) |
+| **RPC URL** | `https://rpc.botchain.ai` |
+| **Explorer URL** | `https://scan.botchain.ai` |
 | **Native Currency** | `BOT` (18 decimals) |
+| **Total Supply** | `150 Million BOT` |
+| **BotLaunchpad Contract** | `0xA1d534dB780c2f82078A3204568289b4604eaFC3` |
+| **BotToken (Sample Token)** | `0x7098adCB452De319A5971fA2da65AB00e3904651` |
 
 ---
 
@@ -119,14 +122,14 @@ All arithmetic is executed entirely on-chain using integer math in Solidity `^0.
 Create a `.env.local` file in the root directory:
 
 ```env
-NEXT_PUBLIC_BOTCHAIN_CHAIN_ID=968
-NEXT_PUBLIC_BOTCHAIN_RPC_URL=https://rpc.bohr.life
-NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL=https://scan.bohr.life
+NEXT_PUBLIC_BOTCHAIN_CHAIN_ID=677
+NEXT_PUBLIC_BOTCHAIN_RPC_URL=https://rpc.botchain.ai
+NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL=https://scan.botchain.ai
 
-NEXT_PUBLIC_BOTLAUNCH_ADDRESS=0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
-NEXT_PUBLIC_BOTTOKEN_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+NEXT_PUBLIC_BOTLAUNCH_ADDRESS=0xA1d534dB780c2f82078A3204568289b4604eaFC3
+NEXT_PUBLIC_BOTTOKEN_ADDRESS=0x7098adCB452De319A5971fA2da65AB00e3904651
 
-# Deployer Private Key for Hardhat on Botchain Testnet
+# Deployer Private Key for Hardhat on Botchain Mainnet
 PRIVATE_KEY=
 ```
 
@@ -159,10 +162,10 @@ Run the comprehensive 25-scenario Hardhat test suite:
 npx hardhat test
 ```
 
-### 4. Deploy Contracts to Botchain Testnet
+### 4. Deploy Contracts to Botchain Mainnet
 
 ```bash
-npx hardhat run scripts/deploy.ts --network botchainTestnet
+npx hardhat run scripts/deploy.ts --network mainnet
 ```
 
 ### 5. Run the Frontend Locally
@@ -208,4 +211,4 @@ npm run start
 
 ## ⚠️ Disclaimer
 
-This software is an educational and testnet prototype built for the Botchain Testnet. While written with industry-standard security patterns (OpenZeppelin, ReentrancyGuard, SafeERC20), it has not undergone an independent professional security audit. Do not deploy to mainnet without extensive independent security review and tokenomic modeling.
+This software is built for Botchain Mainnet. Written with industry-standard security patterns (OpenZeppelin, ReentrancyGuard, SafeERC20). Please ensure independent security reviews and tokenomic modeling prior to executing high-value community capital raises.

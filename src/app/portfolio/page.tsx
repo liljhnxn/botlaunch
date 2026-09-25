@@ -150,7 +150,7 @@ export default function PortfolioPage() {
 
         <div className="p-8 rounded-2xl bg-surface/30 border border-surface-border text-center space-y-3">
           <p className="text-xs text-slate-300">
-            All participations are recorded on the public Botchain Testnet ledger.
+            All participations are recorded on the public Botchain Mainnet ledger.
           </p>
           <div className="flex justify-center gap-3">
             <Link
@@ -166,7 +166,7 @@ export default function PortfolioPage() {
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-xl bg-surface hover:bg-surface-card-hover border border-surface-border text-xs text-slate-300 font-semibold transition-colors inline-flex items-center gap-1.5"
             >
-              <span>View BohrScan History</span>
+              <span>View Explorer History</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>

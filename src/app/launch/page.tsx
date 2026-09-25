@@ -216,7 +216,7 @@ export default function LaunchPage() {
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto">
           Deploy a standard ERC-20 project token, authorize non-custodial escrow, and initialize
-          your public sale on Botchain Testnet in 3 sequential steps.
+          your public sale on Botchain Mainnet in 3 sequential steps.
         </p>
       </div>
 
@@ -519,7 +519,7 @@ export default function LaunchPage() {
             <h2 className="text-2xl font-bold text-white">Sale Successfully Launched!</h2>
             <p className="text-xs text-slate-300 max-w-md mx-auto mt-2">
               Your token has been deployed, escrow funded, and the sale is officially recorded on
-              Botchain Testnet.
+              Botchain Mainnet.
             </p>
           </div>
 

@@ -356,7 +356,7 @@ export default function SaleDetailPage() {
       <div className="py-20 text-center space-y-4">
         <h2 className="text-xl font-bold text-white">Sale Not Found</h2>
         <p className="text-xs text-slate-400">
-          No sale exists with ID #{rawId} on Botchain Testnet.
+          No sale exists with ID #{rawId} on Botchain Mainnet.
         </p>
         <Link
           href="/sales"

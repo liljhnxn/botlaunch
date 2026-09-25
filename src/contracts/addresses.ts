@@ -14,11 +14,11 @@ export const BOTTOKEN_ADDRESS = (process.env.NEXT_PUBLIC_BOTTOKEN_ADDRESS ||
   "0x0000000000000000000000000000000000000000") as `0x${string}`;
 
 export const BOTCHAIN_CHAIN_ID = Number(
-  process.env.NEXT_PUBLIC_BOTCHAIN_CHAIN_ID || 968
+  process.env.NEXT_PUBLIC_BOTCHAIN_CHAIN_ID || 677
 );
 
 export const BOTCHAIN_RPC_URL =
-  process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.bohr.life";
+  process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.botchain.ai";
 
 export const BOTCHAIN_EXPLORER_URL =
-  process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.bohr.life";
+  process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.botchain.ai";

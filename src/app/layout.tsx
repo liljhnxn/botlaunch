@@ -3,12 +3,12 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/Navbar";
 import { Rocket, Github, ExternalLink, Shield } from "lucide-react";
-import { BOTCHAIN_EXPLORER_URL } from "@/contracts/addresses";
+import { BOTCHAIN_EXPLORER_URL, BOTCHAIN_CHAIN_ID, BOTCHAIN_RPC_URL } from "@/contracts/addresses";
 
 export const metadata: Metadata = {
   title: "BOTLAUNCH — Decentralized Token Launchpad",
   description:
-    "A decentralized token launchpad for launching and participating in token sales on Botchain Testnet.",
+    "A decentralized token launchpad for launching and participating in token sales on Botchain Mainnet.",
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     shortcut: "/icon.svg",
@@ -76,13 +76,13 @@ export default function RootLayout({
                         rel="noopener noreferrer"
                         className="hover:text-primary transition-colors flex items-center gap-1.5"
                       >
-                        <span>BohrScan Explorer</span>
+                        <span>BotChain Explorer</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://rpc.bohr.life"
+                        href={BOTCHAIN_RPC_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-primary transition-colors flex items-center gap-1.5"
@@ -102,11 +102,15 @@ export default function RootLayout({
                   <div className="space-y-1.5 font-mono text-[11px]">
                     <div className="flex justify-between py-0.5 border-b border-white/5">
                       <span className="text-slate-500">Chain ID:</span>
-                      <span className="text-primary font-bold">968</span>
+                      <span className="text-primary font-bold">{BOTCHAIN_CHAIN_ID}</span>
                     </div>
                     <div className="flex justify-between py-0.5 border-b border-white/5">
-                      <span className="text-slate-500">Symbol:</span>
+                      <span className="text-slate-500">Native Token:</span>
                       <span className="text-slate-200">BOT</span>
+                    </div>
+                    <div className="flex justify-between py-0.5 border-b border-white/5">
+                      <span className="text-slate-500">Total Supply:</span>
+                      <span className="text-emerald-400 font-semibold">150 Million BOT</span>
                     </div>
                     <div className="flex justify-between py-0.5 border-b border-white/5">
                       <span className="text-slate-500">Decimals:</span>
@@ -114,15 +118,15 @@ export default function RootLayout({
                     </div>
                     <div className="flex justify-between py-0.5">
                       <span className="text-slate-500">Status:</span>
-                      <span className="text-emerald-400 font-semibold">Testnet Active</span>
+                      <span className="text-emerald-400 font-semibold">Mainnet Active</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-                <p>© {new Date().getFullYear()} BotLaunchpad Protocol. Built for Botchain Testnet.</p>
-                <p>Educational & Testnet Prototype. Not for un-audited mainnet financial deployments.</p>
+                <p>© {new Date().getFullYear()} BotLaunchpad Protocol. Built for Botchain Mainnet.</p>
+                <p>Decentralized Token Launchpad Protocol on Botchain Mainnet.</p>
               </div>
             </div>
           </footer>

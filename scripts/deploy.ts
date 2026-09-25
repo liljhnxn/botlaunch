@@ -11,6 +11,9 @@ async function main() {
   console.log("Account balance:", ethers.formatEther(balance), "BOT");
   console.log("----------------------------------------------------");
 
+  const network = await ethers.provider.getNetwork();
+  console.log(`Target Network: ${network.name} (Chain ID: ${network.chainId})`);
+
   // 1. Deploy BotToken (Nova Token sample)
   const initialSupply = ethers.parseUnits("1000000", 18); // 1,000,000 NOVA
   const BotTokenFactory = await ethers.getContractFactory("BotToken");
@@ -18,7 +21,8 @@ async function main() {
     "Nova Token",
     "NOVA",
     initialSupply,
-    deployer.address
+    deployer.address,
+    { gasPrice: ethers.parseUnits("20", "gwei") }
   );
   await botToken.waitForDeployment();
   const botTokenAddress = await botToken.getAddress();
@@ -27,7 +31,9 @@ async function main() {
 
   // 2. Deploy BotLaunchpad
   const BotLaunchpadFactory = await ethers.getContractFactory("BotLaunchpad");
-  const botLaunchpad = await BotLaunchpadFactory.deploy();
+  const botLaunchpad = await BotLaunchpadFactory.deploy({
+    gasPrice: ethers.parseUnits("20", "gwei"),
+  });
   await botLaunchpad.waitForDeployment();
   const botLaunchpadAddress = await botLaunchpad.getAddress();
   console.log("BotLaunchpad deployed:");

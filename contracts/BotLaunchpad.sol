@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /**
  * @title BotLaunchpad
- * @dev Decentralized token launchpad on Botchain Testnet for launching, funding, and claiming project tokens.
+ * @dev Decentralized token launchpad on Botchain Mainnet for launching, funding, and claiming project tokens.
  */
 contract BotLaunchpad is ReentrancyGuard {
     using SafeERC20 for IERC20;

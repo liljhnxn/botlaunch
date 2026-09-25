@@ -100,7 +100,7 @@ export function TransactionStatusModal({
                   {step === "pending" ? "Transaction Submitted" : "Confirming on Botchain..."}
                 </h4>
                 <p className="text-xs text-slate-400 mt-1">
-                  Broadcasting block to Bohr consensus. Waiting for block receipt...
+                  Broadcasting transaction to Botchain consensus. Waiting for block receipt...
                 </p>
               </div>
             </>

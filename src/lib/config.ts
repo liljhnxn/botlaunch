@@ -2,9 +2,9 @@ import { http, createConfig } from "wagmi";
 import { injected } from "wagmi/connectors";
 import { defineChain } from "viem";
 
-export const botchainTestnet = defineChain({
-  id: 968,
-  name: "Botchain Testnet",
+export const botchain = defineChain({
+  id: Number(process.env.NEXT_PUBLIC_BOTCHAIN_CHAIN_ID || 677),
+  name: "Botchain",
   nativeCurrency: {
     decimals: 18,
     name: "BOT",
@@ -12,23 +12,22 @@ export const botchainTestnet = defineChain({
   },
   rpcUrls: {
     default: {
-      http: [process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.bohr.life"],
+      http: [process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.botchain.ai"],
     },
     public: {
-      http: [process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.bohr.life"],
+      http: [process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.botchain.ai"],
     },
   },
   blockExplorers: {
     default: {
-      name: "BohrScan",
-      url: process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.bohr.life",
+      name: "BotScan",
+      url: process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.botchain.ai",
     },
   },
-  testnet: true,
 });
 
 export const wagmiConfig = createConfig({
-  chains: [botchainTestnet],
+  chains: [botchain],
   connectors: [
     injected({
       target: "metaMask",
@@ -36,7 +35,7 @@ export const wagmiConfig = createConfig({
     injected(),
   ],
   transports: {
-    [botchainTestnet.id]: http(),
+    [botchain.id]: http(),
   },
   ssr: true,
 });

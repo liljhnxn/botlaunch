@@ -56,7 +56,7 @@ export default function SalesExplorerPage() {
             Explore Token Sales
           </h1>
           <p className="text-xs text-slate-400 mt-1">
-            Discover active and upcoming decentralized sales on Botchain Testnet.
+            Discover active and upcoming decentralized sales on Botchain Mainnet.
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export default function SalesExplorerPage() {
             <p className="text-xs text-slate-400 max-w-sm mx-auto mt-1">
               {searchQuery || filterStatus !== "ALL"
                 ? "No token sales match your selected filters. Try clearing your search query."
-                : "No token sales have been registered yet on Botchain Testnet."}
+                : "No token sales have been registered yet on Botchain Mainnet."}
             </p>
           </div>
           {(searchQuery || filterStatus !== "ALL") && (

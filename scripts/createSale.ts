@@ -7,7 +7,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("----------------------------------------------------");
-  console.log("Creating live token sale on Botchain Testnet");
+  console.log("Creating live token sale on Botchain Mainnet");
   console.log("Creator account:", deployer.address);
   const balance = await ethers.provider.getBalance(deployer.address);
   console.log("Account balance:", ethers.formatEther(balance), "BOT");
@@ -68,9 +68,8 @@ async function main() {
 
   const saleCount = await botLaunchpad.saleCount();
   console.log("----------------------------------------------------");
-  console.log("🎉 LIVE SALE ID:", saleCount.toString());
-  console.log("View in dApp: http://localhost:3002/sales/" + saleCount.toString());
-  console.log("View on BohrScan: https://scan.bohr.life/tx/" + createTx.hash);
+  console.log("View in dApp: /sales/" + saleCount.toString());
+  console.log("View on Explorer: " + (process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.botchain.ai") + "/tx/" + createTx.hash);
   console.log("----------------------------------------------------");
 }
 
