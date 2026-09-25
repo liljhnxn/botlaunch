@@ -1,10 +1,15 @@
 import { http, createConfig } from "wagmi";
 import { injected } from "wagmi/connectors";
 import { defineChain } from "viem";
+import {
+  BOTCHAIN_CHAIN_ID,
+  BOTCHAIN_RPC_URL,
+  BOTCHAIN_EXPLORER_URL,
+} from "@/contracts/addresses";
 
 export const botchain = defineChain({
-  id: Number(process.env.NEXT_PUBLIC_BOTCHAIN_CHAIN_ID || 677),
-  name: "Botchain",
+  id: BOTCHAIN_CHAIN_ID,
+  name: "Botchain Mainnet",
   nativeCurrency: {
     decimals: 18,
     name: "BOT",
@@ -12,16 +17,16 @@ export const botchain = defineChain({
   },
   rpcUrls: {
     default: {
-      http: [process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.botchain.ai"],
+      http: [BOTCHAIN_RPC_URL],
     },
     public: {
-      http: [process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.botchain.ai"],
+      http: [BOTCHAIN_RPC_URL],
     },
   },
   blockExplorers: {
     default: {
-      name: "BotScan",
-      url: process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.botchain.ai",
+      name: "Botchain Explorer",
+      url: BOTCHAIN_EXPLORER_URL,
     },
   },
 });

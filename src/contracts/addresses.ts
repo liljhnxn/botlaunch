@@ -13,12 +13,13 @@ export const BOTTOKEN_ADDRESS = (process.env.NEXT_PUBLIC_BOTTOKEN_ADDRESS ||
   (addressesJson as any)?.botToken ||
   "0x0000000000000000000000000000000000000000") as `0x${string}`;
 
-export const BOTCHAIN_CHAIN_ID = Number(
-  process.env.NEXT_PUBLIC_BOTCHAIN_CHAIN_ID || 677
-);
+// Enforce Botchain Mainnet (Chain ID 677). Stale testnet values (e.g. 968) are rejected.
+const rawChainId = Number(process.env.NEXT_PUBLIC_BOTCHAIN_CHAIN_ID);
+export const BOTCHAIN_CHAIN_ID = (rawChainId && rawChainId !== 968) ? rawChainId : 677;
 
-export const BOTCHAIN_RPC_URL =
-  process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL || "https://rpc.botchain.ai";
+const rawRpc = process.env.NEXT_PUBLIC_BOTCHAIN_RPC_URL;
+export const BOTCHAIN_RPC_URL = (rawRpc && !rawRpc.includes("bohr.life")) ? rawRpc : "https://rpc.botchain.ai";
 
-export const BOTCHAIN_EXPLORER_URL =
-  process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.botchain.ai";
+const rawExplorer = process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL;
+export const BOTCHAIN_EXPLORER_URL = (rawExplorer && !rawExplorer.includes("bohr.life")) ? rawExplorer : "https://scan.botchain.ai";
+

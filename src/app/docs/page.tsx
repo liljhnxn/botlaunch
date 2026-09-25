@@ -35,7 +35,7 @@ export default function DocsPage() {
         params: [
           {
             chainId: `0x${BOTCHAIN_CHAIN_ID.toString(16)}`,
-            chainName: "Botchain",
+            chainName: "Botchain Mainnet",
             nativeCurrency: {
               name: "BOT",
               symbol: "BOT",
