@@ -8,12 +8,14 @@ import {
   useWaitForTransactionReceipt,
   useDeployContract,
   usePublicClient,
+  useBalance,
 } from "wagmi";
-import { parseUnits, parseEther } from "viem";
+import { parseUnits, parseEther, formatEther } from "viem";
 import {
   BOTLAUNCH_ADDRESS,
   BOTCHAIN_EXPLORER_URL,
 } from "@/contracts/addresses";
+import { botchain } from "@/lib/config";
 import BotLaunchpadArtifact from "@/contracts/BotLaunchpad.json";
 import BotTokenArtifact from "@/contracts/BotToken.json";
 import {
@@ -31,6 +33,12 @@ import {
 export default function LaunchPage() {
   const { address, isConnected } = useAccount();
   const publicClient = usePublicClient();
+  const { data: balanceData, refetch: refetchBalance } = useBalance({
+    address,
+    chainId: botchain.id,
+  });
+  const botBalance = balanceData ? Number(formatEther(balanceData.value)) : 0;
+  const ESTIMATED_DEPLOY_GAS_BOT = 0.012;
 
   // Form Fields
   const [tokenName, setTokenName] = useState("Nova Token");
@@ -76,11 +84,40 @@ export default function LaunchPage() {
   const { deployContractAsync } = useDeployContract();
   const { writeContractAsync } = useWriteContract();
 
+  function parseErrorMessage(err: any, stepContext: string): string {
+    const raw = String(err?.shortMessage || err?.message || "");
+    const str = String(err || "");
+    if (
+      raw.includes("internal error") ||
+      raw.includes("Internal JSON-RPC") ||
+      raw.includes("insufficient funds") ||
+      raw.includes("-32603") ||
+      str.includes("internal error") ||
+      str.includes("-32603")
+    ) {
+      return `Insufficient BOT for gas. Deploying this ERC-20 contract requires ~0.012 BOT in network gas, but your wallet currently holds ${botBalance.toFixed(4)} BOT. Please top up your wallet with at least 0.025 – 0.05 BOT to cover all 3 launch steps.`;
+    }
+    if (raw.includes("User rejected") || raw.includes("rejected the request")) {
+      return "Transaction was cancelled in your wallet.";
+    }
+    return raw || `${stepContext} failed. Please verify you have sufficient BOT for network gas fees.`;
+  }
+
   // STEP 1: Deploy ERC-20 Project Token
   async function handleDeployToken() {
     if (!isConnected || !address) return;
     try {
       setErrorMsg("");
+
+      // Pre-flight balance check
+      if (botBalance > 0 && botBalance < ESTIMATED_DEPLOY_GAS_BOT) {
+        setErrorMsg(
+          `Insufficient BOT for gas fees. Your balance is ${botBalance.toFixed(4)} BOT, but deploying an ERC-20 token requires ~${ESTIMATED_DEPLOY_GAS_BOT} BOT (and ~0.025 BOT for all 3 launch steps). Please add BOT to your wallet and try again.`
+        );
+        setStep1State("error");
+        return;
+      }
+
       setStep1State("loading");
 
       const supplyWei = parseUnits(initialSupply, 18);
@@ -99,16 +136,18 @@ export default function LaunchPage() {
           setDeployedTokenAddress(receipt.contractAddress);
           setStep1State("done");
           setCurrentStep(2);
+          refetchBalance();
           return;
         }
       }
 
       setStep1State("done");
       setCurrentStep(2);
+      refetchBalance();
     } catch (err: any) {
       console.error(err);
       setStep1State("error");
-      setErrorMsg(err?.shortMessage || err?.message || "Token deployment failed");
+      setErrorMsg(parseErrorMessage(err, "Token deployment"));
     }
   }
 
@@ -136,10 +175,11 @@ export default function LaunchPage() {
 
       setStep2State("done");
       setCurrentStep(3);
+      refetchBalance();
     } catch (err: any) {
       console.error(err);
       setStep2State("error");
-      setErrorMsg(err?.shortMessage || err?.message || "Token approval failed");
+      setErrorMsg(parseErrorMessage(err, "Token approval"));
     }
   }
 
@@ -196,10 +236,11 @@ export default function LaunchPage() {
 
       setStep3State("done");
       setCurrentStep(4);
+      refetchBalance();
     } catch (err: any) {
       console.error(err);
       setStep3State("error");
-      setErrorMsg(err?.shortMessage || err?.message || "Sale creation failed");
+      setErrorMsg(parseErrorMessage(err, "Sale creation"));
     }
   }
 
@@ -279,9 +320,23 @@ export default function LaunchPage() {
 
       {/* Error Banner */}
       {errorMsg && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-start gap-3 animate-in fade-in">
-          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-          <div className="break-words font-mono">{errorMsg}</div>
+        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-in fade-in">
+          <div className="flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400 mt-0.5" />
+            <div className="break-words font-sans leading-relaxed">{errorMsg}</div>
+          </div>
+          <button
+            onClick={() => {
+              setErrorMsg("");
+              setStep1State("idle");
+              setStep2State("idle");
+              setStep3State("idle");
+              refetchBalance();
+            }}
+            className="shrink-0 px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 text-[11px] text-rose-200 font-semibold"
+          >
+            Clear & Retry
+          </button>
         </div>
       )}
 
@@ -439,8 +494,33 @@ export default function LaunchPage() {
             </div>
           </div>
 
+          {/* Wallet Balance & Gas Fee Advisor */}
+          <div className="space-y-3 pt-4 border-t border-surface-border/50">
+            <div className="p-3.5 rounded-xl bg-surface border border-surface-border text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono">
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400">Your BOT Balance:</span>
+                <span className={`font-bold ${botBalance < 0.015 ? "text-amber-400" : "text-emerald-400"}`}>
+                  {isConnected ? `${botBalance.toFixed(4)} BOT` : "Connect wallet"}
+                </span>
+              </div>
+              <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
+                <Info className="w-3 h-3 text-primary" />
+                <span>Deploy Gas: ~0.012 BOT | Total Launch: ~0.025 BOT</span>
+              </div>
+            </div>
+
+            {isConnected && botBalance > 0 && botBalance < 0.015 && (
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-start gap-2.5">
+                <AlertCircle className="w-4 h-4 shrink-0 text-amber-400 mt-0.5" />
+                <div className="leading-relaxed">
+                  <strong>Low Balance Warning ({botBalance.toFixed(4)} BOT):</strong> Contract deployment costs ~0.012 BOT in network gas. Please top up your wallet with at least <strong>0.025 – 0.05 BOT</strong> to complete deployment and sale creation without MetaMask gas rejection errors.
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Active Action Button */}
-          <div className="pt-6 border-t border-surface-border/60">
+          <div className="pt-2">
             {currentStep === 1 && (
               <button
                 onClick={handleDeployToken}
